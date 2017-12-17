@@ -236,3 +236,91 @@ export const storeResult = (result) => {
     }
 };
 ```
+
+Note, you have access to state. You can do something like this.
+
+```
+export const storeResult = (result) => {
+    return (dispatch, getState) => {
+        setTimeout(()=> {
+            const oldCounter = getState().ctr.counter;
+            console.log(oldCounter);
+            dispatch(saveResult(result));
+        }, 2000);
+    }
+};
+```
+
+Don't abuse this, not necessary.
+
+# Restructuring Actions Folder
+
+This is for bigger projects.
+
+1. Under store, create folder actions.
+2. Under actions folder, create actionTypes.js, index.js (and whatever other action files: For example: counter.js, results.js where counter stores counter related actions and results stores results related actions)
+3. In the actionTypes.js file, have all the action types
+```
+export const INCREMENT = 'INCREMENT';
+export const DECREMENT = 'DECREMENT';
+...
+```
+4. In the index.js file, have this
+```
+export {
+    add,
+    subtract,
+    increment,
+    decrement
+} from './counter';
+export {
+    storeResult,
+    removeResult
+} from './result';
+```
+5. Now in the reducers, adjust the import
+
+```import * as actionTypes from '../actions/actionTypes';```
+
+# Action Creators vs Reducers - where to put the logic?
+
+### Action Creators
+
+- Can run Async Code
+- Shouldn't prepare the state update too much
+
+### Reducers
+
+- Pure, Sync code only!
+- Core Redux Concept: Reducers is the only thing that updates state
+
+You can argue both ways, lean towards logic in reducer. Async code goes into action creator, once you have data
+that is relatively clean (i.e you changed it up a bit), pass it to reducer. Choose an approach and stick to it.
+Be consistent. 
+
+# Good Practice: Clean up Reducer
+
+1. In store folder, create utility.js
+
+```
+export const updateObject = (oldObject, updatedValues) => {
+    return {
+        ...oldObject,
+        ...updatedValues
+    }
+};
+```
+
+2. In reducer file
+
+```
+import { updateObject } from '../utility';
+
+const reducer = (state = initialState, action) => {
+    switch (action.type) {
+        case actionTypes.SUBTRACT:
+            return updateObject(state, {counter: state.counter - action.value});
+        ...
+    }
+}
+```
