@@ -162,7 +162,7 @@ Now, change createStore to
 
 # Asynchronous Code and Redux
 
-###### Action Creators
+#### Action Creators
 
 Create subfolder in store folder and name it actions. If you have an actions.js file, move it into the folder.
 
@@ -201,3 +201,38 @@ storeResult: (result) => dispatch(actionCreators.storeResult(result)),
 ```
 
 Note: When you execute increment() you get an action
+
+#### Add Middleware: Redux-thunk
+
+Redux-thunk allows your action creators to return a function which will eventually dispatch an action. Now, you can run asynchronous code.
+
+Run: ```npm install --save redux-thunk```
+
+Go to index.js:
+```import thunk from 'redux-thunk';```
+
+Adjust
+```const store = createStore(rootReducer, composeEnhancers(applyMiddleware(logger, thunk)));```
+
+Now in the actions.js file, adjust the code as follows
+
+```
+// Synchronous action creators: Dispatch actions created by syncrhonous one
+export const saveResult = ( result ) => {
+    return {
+        type: STORE_RESULT,
+        result: result
+    };
+}
+//Middleware runs between the dispatching of an action, and the point in time the action
+//reaches reducer. Here we dispatch an action, thunk middleware steps in, blocks the old action,
+//dispatches it again, in the future. The new action will reach the reducer, but in between, redux
+//thunk is able to wait. This is the asynchronous part. 
+export const storeResult = (result) => {
+    return dispatch => {
+        setTimeout(()=> {
+            dispatch(saveResult(result));
+        }, 2000);
+    }
+};
+```
