@@ -161,3 +161,43 @@ Now, change createStore to
 ```const store = createStore(rootReducer, composeEnhancers(applyMiddleware(logger)));```
 
 # Asynchronous Code and Redux
+
+###### Action Creators
+
+Create subfolder in store folder and name it actions. If you have an actions.js file, move it into the folder.
+
+An action creator is a function which creates an action.
+
+```
+const increment = () => {
+    return {
+        type: INCREMENT
+    };
+};
+export const storeResult = (result) => {
+    return {
+        type: STORE_RESULT,
+        result: result
+    };
+};
+```
+
+We can now use action in container. In container add this import statement
+
+```import * as actionCreators from '../../store/actions/action';```
+
+Now, in mapDispatchToProps function, you can change
+
+```
+onIncrementCounter: () => dispatch({type: actionTypes.INCREMENT}),
+storeResult: (result) => dispatch({type: actionTypes.STORE_RESULT, result: result})
+```
+
+ to 
+
+```
+onIncrementCounter: () => dispatch(actionCreators.increment()),
+storeResult: (result) => dispatch(actionCreators.storeResult(result)),
+```
+
+Note: When you execute increment() you get an action
