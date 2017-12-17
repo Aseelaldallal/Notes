@@ -1,4 +1,5 @@
 
+## Basic Setup
 
 1. Create store in index.js:
 
