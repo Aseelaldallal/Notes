@@ -1,16 +1,16 @@
 
 ## Basic Setup
 
-1. Create store in index.js:
-
+**1. Create store in index.js:**
+```
 import {createStore} from 'redux';
 const store = createStore();
-
+```
 Store takes a reducer as input. Store reducer logic into its own file.
 
-2. Create Store Folder
-3. Create reducer.js file in Store folder
-
+**2. Create Store Folder under src****
+**3. Create reducer.js file in Store folder**
+```
 const initialState = {
     counter: 0
 }
@@ -20,22 +20,22 @@ const reducer = (state = initialState, action) => {
 }
 
 export default reducer;
+```
+**4. Import reducer into index.js and pass it to createstore**
 
-4. Import reducer into index.js and pass it to createstore
-
-5. Connect store to react application: 
+**5. Connect store to react application: **
 - npm install 'react-redux'
-- import { Provider } from 'react-redux'
-- wrap app with provider: <Provider store={store}> <App /> </Provider>
+- ```import { Provider } from 'react-redux'```
+- wrap app with provider: ```<Provider store={store}> <App /> </Provider>```
 
-6. Go to container and add import { connect } from 'react-redux';
+**6. Go to container and add import { connect } from 'react-redux';**
 Connect is a function that returns a higher order function that you can pass the component to.
 
-7. export default connect()(Counter); 
+**7. In container export default connect()(Counter); **
 In connect, we pass two pieces of info: which part of the application state is important to us in
 this container, and which actions do I want to dispatch
 
-8. Add function
+**8. In container Add function**
 const mapStateToProps = (state) =>  {
     return {
         ctr: state.counter
@@ -45,7 +45,7 @@ and pass it to connect.
 export default connect(mapStateToProps)(Counter);
 Now connect gives us the Counter container with access to ctr property
 
-9. Now dispatch actions in the container
+**9. Now dispatch actions in the container**
 const mapDispatchToProps = dispatch => {
     return {
         onIncrementCounter: () => dispatch({type: 'INCREMENT'}),
@@ -56,10 +56,10 @@ const mapDispatchToProps = dispatch => {
 }
 'react-redux' is giving us the dispatch function
 
-10. Change connect method to
+**10. Change connect method to**
 export default connect(mapStateToProps, mapDispatchToProps)(Counter);
 
-11. Make sure you implement the logic in reducer.js
+**11. Make sure you implement the logic in reducer.js**
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case 'INCREMENT':
@@ -75,7 +75,8 @@ const reducer = (state = initialState, action) => {
     }
 }
 
-12. Combining Multiple Reducers
+# Combining Multiple Reducers
+
 In Store folder, create reducers folder
 then in index.js 
 import counterReducer from './store/reducers/counter';
@@ -95,7 +96,7 @@ const mapStateToProps = (state) =>  {
 }
 But now you must connect the reducer, if you need value from global state, you get it as an action (payload)
 
-13. Adding Middleware: Go to index.js and add this code
+# Adding Middleware: Go to index.js and add this code
 
 const logger = store => {
     return next => {
