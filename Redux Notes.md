@@ -23,24 +23,32 @@ export default reducer;
 ```
 **4. Import reducer into index.js and pass it to createstore**
 
-**5. Connect store to react application: **
-- npm install 'react-redux'
+**5. Connect store to react application:**
+
+- ```npm install 'react-redux'```
 - ```import { Provider } from 'react-redux'```
 - wrap app with provider: ```<Provider store={store}> <App /> </Provider>```
 
-**6. Go to container and add import { connect } from 'react-redux';**
-Connect is a function that returns a higher order function that you can pass the component to.
+**6. Import connect in Container**
 
-**7. In container export default connect()(Counter); **
+```import { connect } from 'react-redux';```
+
+Connect is a function that returns a higher order function that you can pass the component to.
+Then adjust the export statement:
+
+```export default connect()(Counter);```
+
 In connect, we pass two pieces of info: which part of the application state is important to us in
 this container, and which actions do I want to dispatch
 
-**8. In container Add function**
-const mapStateToProps = (state) =>  {
+**8. Add mapStateToProps function**
+
+```const mapStateToProps = (state) =>  {
     return {
         ctr: state.counter
     };
-}
+}```
+
 and pass it to connect.
 export default connect(mapStateToProps)(Counter);
 Now connect gives us the Counter container with access to ctr property
