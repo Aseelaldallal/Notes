@@ -43,17 +43,22 @@ this container, and which actions do I want to dispatch
 
 **8. Add mapStateToProps function**
 
-```const mapStateToProps = (state) =>  {
+```
+const mapStateToProps = (state) =>  {
     return {
         ctr: state.counter
     };
-}```
+}
+```
 
 and pass it to connect.
-export default connect(mapStateToProps)(Counter);
+
+```export default connect(mapStateToProps)(Counter);```
+
 Now connect gives us the Counter container with access to ctr property
 
 **9. Now dispatch actions in the container**
+```
 const mapDispatchToProps = dispatch => {
     return {
         onIncrementCounter: () => dispatch({type: 'INCREMENT'}),
@@ -62,12 +67,16 @@ const mapDispatchToProps = dispatch => {
         onSubtractCounter: () => dispatch({type: 'SUBTRACT', value: 5})
     }
 }
+```
 'react-redux' is giving us the dispatch function
 
-**10. Change connect method to**
-export default connect(mapStateToProps, mapDispatchToProps)(Counter);
+**10. Adjust export statement**
 
-**11. Make sure you implement the logic in reducer.js**
+```export default connect(mapStateToProps, mapDispatchToProps)(Counter);```
+
+**11. Implement the logic in reducer.js**
+
+```
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case 'INCREMENT':
@@ -82,11 +91,14 @@ const reducer = (state = initialState, action) => {
             return state; // THIS IS IMPORTANT -- otherwise application breaks
     }
 }
+```
 
 # Combining Multiple Reducers
 
 In Store folder, create reducers folder
 then in index.js 
+
+```
 import counterReducer from './store/reducers/counter';
 import resultReducer from './store/reducers/results';
 import {createStore, combineReducers} from 'redux';
@@ -95,17 +107,24 @@ const rootReducer = combineReducers({
     res: resultReducer
 }) // merge everything into one reducer
 const store = createStore(rootReducer);
+```
+
 Then adjust
+
+```
 const mapStateToProps = (state) =>  {
     return {
         ctr: state.ctr.counter,
         results: state.res.results
     };
 }
+```
+
 But now you must connect the reducer, if you need value from global state, you get it as an action (payload)
 
 # Adding Middleware: Go to index.js and add this code
 
+```
 const logger = store => {
     return next => {
         return action => {
@@ -116,25 +135,29 @@ const logger = store => {
         }
     }
 }
+```
 
 Now we need to apply middleware to store.
 
+```
 import { applyMiddleware} from 'redux';
 const store = createStore(rootReducer, applyMiddleware(logger));
+```
 
 Note: applyMiddleware(logger) is an enhancer.
 
 
 # Redux Dev Tools Extension
 
-import {compose} from 'redux';
+```import {compose} from 'redux';```
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // compose is a fallback
+```const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // compose is a fallback```
 
 This is a variable injected by chrome extension into our JS at runtime. Add it to the
 index.js file right before creating the store. Compose allows us to combine enhancers.
 
 Now, change createStore to 
-const store = createStore(rootReducer, composeEnhancers(applyMiddleware(logger)));
+
+```const store = createStore(rootReducer, composeEnhancers(applyMiddleware(logger)));```
 
 # Asynchronous Code and Redux
