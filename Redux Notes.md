@@ -162,7 +162,7 @@ Now, change createStore to
 
 # Asynchronous Code and Redux
 
-#### Action Creators
+### Action Creators
 
 Create subfolder in store folder and name it actions. If you have an actions.js file, move it into the folder.
 
@@ -202,7 +202,7 @@ storeResult: (result) => dispatch(actionCreators.storeResult(result)),
 
 Note: When you execute increment() you get an action
 
-#### Add Middleware: Redux-thunk
+### Add Middleware: Redux-thunk
 
 Redux-thunk allows your action creators to return a function which will eventually dispatch an action. Now, you can run asynchronous code.
 
@@ -252,6 +252,13 @@ export const storeResult = (result) => {
 ```
 
 Don't abuse this, not necessary.
+
+### Shortcut : Redux thunk and Redux Devtools
+
+```
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // compose is a fallback
+const store = createStore(burgerBuilderReducer, composeEnhancers(applyMiddleware(thunk)));
+```
 
 # Restructuring Actions Folder
 
