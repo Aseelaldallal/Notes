@@ -9,6 +9,7 @@ const store = createStore();
 Store takes a reducer as input. Store reducer logic into its own file.
 
 **2. Create Store Folder under src****
+
 **3. Create reducer.js file in Store folder**
 ```
 const initialState = {
