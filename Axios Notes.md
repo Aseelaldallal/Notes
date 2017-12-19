@@ -36,7 +36,7 @@ axios.interceptors.response.use(response => {
 You have to return the request config, otherwise you're blocking the request.
 
 ### Defaults
--
+
 Assume you're always sending requests to the same URL. Or you want to set a common header.
 
 In index.js:
@@ -72,3 +72,11 @@ instance.defaults.headers.common['Authorization'] = 'AUTH TOKEN FROM INSTANCE';
 ```
 
 Now, we can use this instance in our components and containers.
+
+In your component/container, replace
+
+```import axios from 'axios';```
+
+with
+
+```import axios from 'the path of your axios instance'```
