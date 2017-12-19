@@ -36,7 +36,7 @@ axios.interceptors.response.use(response => {
 You have to return the request config, otherwise you're blocking the request.
 
 ### Defaults
-
+-
 Assume you're always sending requests to the same URL. Or you want to set a common header.
 
 In index.js:
@@ -48,3 +48,27 @@ axios.defaults.headers.post['Content-Type'] = 'application/json'; // This is def
 ```
 
 In the third case, you're only setting the defaults for post request.
+
+### Instances
+
+What if you don't want to have the same baseURL for your entire application, but only for parts of it? The same with headers and so on. Instances come to the rescue.
+
+Create a new file axios.js in the source folder.
+
+```
+import axios from 'axios';
+
+const instance = axios.create({
+    baseURL: 'https://wagaboobi...'
+});
+```
+
+By default, this instance will also assume the defaults set up in index.js but override anything that it sets up above. 
+
+Now after creating the baseURL, we can do as follows:
+
+```
+instance.defaults.headers.common['Authorization'] = 'AUTH TOKEN FROM INSTANCE';
+```
+
+Now, we can use this instance in our components and containers.
