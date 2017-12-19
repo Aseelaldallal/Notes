@@ -8,6 +8,9 @@
 You can intercept requests or responses before they are handled by then or catch. They are functions you can define globally 
 that will be executed for every request leaving your app, and every response returning into it.
 
+
+### Manipulating Requests and Responses
+
 In index.js:
 
 ```
@@ -31,3 +34,17 @@ axios.interceptors.response.use(response => {
 ```
 
 You have to return the request config, otherwise you're blocking the request.
+
+### Defaults
+
+Assume you're always sending requests to the same URL. Or you want to set a common header.
+
+In index.js:
+
+```
+axios.defaults.baseURL = 'https://json....';
+axios.defaults.headers.common['Authorization'] = 'AUTH TOKEN';
+axios.defaults.headers.post['Content-Type'] = 'application/json'; // This is default
+```
+
+In the third case, you're only setting the defaults for post request.
