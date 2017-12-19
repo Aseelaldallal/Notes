@@ -71,6 +71,8 @@ Now after creating the baseURL, we can do as follows:
 instance.defaults.headers.common['Authorization'] = 'AUTH TOKEN FROM INSTANCE';
 ```
 
+Remember to export your instance at the end of the file!
+
 Now, we can use this instance in our components and containers.
 
 In your component/container, replace
