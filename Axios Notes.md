@@ -4,6 +4,7 @@
 
 
 
+
 ## INTERCEPTORS
 
 You can intercept requests or responses before they are handled by then or catch. They are functions you can define globally 
@@ -83,3 +84,9 @@ In your component/container, replace
 with
 
 ```import axios from 'the path of your axios instance'```
+
+*Note: You can add interceptors in your instances.*
+
+
+
+
