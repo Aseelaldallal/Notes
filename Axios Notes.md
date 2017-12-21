@@ -1,10 +1,11 @@
 
 
-# Executing Code Globally - Interceptors
+# USING AXIOS WITH REACT
 
 
 
-**Interceptors:** 
+## INTERCEPTORS
+
 You can intercept requests or responses before they are handled by then or catch. They are functions you can define globally 
 that will be executed for every request leaving your app, and every response returning into it.
 
@@ -35,7 +36,7 @@ axios.interceptors.response.use(response => {
 
 You have to return the request config, otherwise you're blocking the request.
 
-### Defaults
+## DEFAULTS
 
 Assume you're always sending requests to the same URL. Or you want to set a common header.
 
@@ -49,7 +50,7 @@ axios.defaults.headers.post['Content-Type'] = 'application/json'; // This is def
 
 In the third case, you're only setting the defaults for post request.
 
-### Instances
+## INSTANCES
 
 What if you don't want to have the same baseURL for your entire application, but only for parts of it? The same with headers and so on. Instances come to the rescue.
 
