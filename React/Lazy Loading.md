@@ -1,7 +1,7 @@
 
 ## LAZY LOADING
 
-**Purpose**: Only load components when you need them.
+**Purpose**: Only load components when you need them. Only do this if the components are huge.
 
 1. In hoc folder, create asyncComponent folder and asyncComponent.js file.
 2. Add the following code
