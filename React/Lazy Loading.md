@@ -49,3 +49,5 @@ const asyncCheckout = asyncComponent(()=> {
 ```<Route path="/checkout" component={Checkout}/>```
 with
 ```<Route path="/checkout" component={asyncCheckout}/>```
+
+Don't forget to get rid of the original Checkout import!
