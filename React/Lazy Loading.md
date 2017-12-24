@@ -1,6 +1,7 @@
 
+## LAZY LOADING
 
-Purpose: Only load components when you need them.
+**Purpose**: Only load components when you need them.
 
 1. In hoc folder, create asyncComponent folder and asyncComponent.js file.
 2. Add the following code
@@ -32,4 +33,14 @@ const asyncComponent = (importComponent) => {
 }
 
 export default asyncComponent;
+```
+
+3. In App.js (or wherever you're loading the component via <Route ..), import asyncComponent
+
+4. Lets assume the component you want to load lazily is called Checkout. Add the following code
+
+```
+const asyncCheckout = asyncComponent(()=> {
+  return import('[PATH TO COMPONENT YOU WANT TO LOAD LAZILY]');
+});
 ```
