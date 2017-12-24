@@ -37,10 +37,15 @@ export default asyncComponent;
 
 3. In App.js (or wherever you're loading the component via <Route ..), import asyncComponent
 
-4. Lets assume the component you want to load lazily is called Checkout. Add the following code
+4. Lets assume the component you want to load lazily is called Checkout. Add the following code above the class definition
 
 ```
 const asyncCheckout = asyncComponent(()=> {
   return import('[PATH TO COMPONENT YOU WANT TO LOAD LAZILY]');
 });
 ```
+
+5. Now replace 
+```<Route path="/checkout" component={Checkout}/>```
+with
+```<Route path="/checkout" component={asyncCheckout}/>```
