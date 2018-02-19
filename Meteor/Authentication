@@ -7,8 +7,7 @@ meteor add accounts-password
 
 import { Accounts } from 'meteor/accounts-base';
 
-```
-  onSubmit = e => {
+```onSubmit = e => {
     e.preventDefault();
     let email = this.refs.email.value.trim();
     let password = this.refs.password.value.trim();
