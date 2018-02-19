@@ -1,0 +1,43 @@
+
+
+
+#Getting Started
+
+meteor add accounts-password
+
+import { Accounts } from 'meteor/accounts-base';
+
+```javascript
+  onSubmit = e => {
+    e.preventDefault();
+    let email = this.refs.email.value.trim();
+    let password = this.refs.password.value.trim();
+    // Automatically signs you in
+    Accounts.createUser({ email, password}, err => {
+      console.log('Signup callback', err);
+    });
+
+    this.setState({
+      error: 'Something went wrong.'
+    });
+  };
+  
+  render() {
+    return (
+      <div>
+        {this.state.error ? <p> {this.state.error} </p> : null}
+        <form onSubmit={this.onSubmit}>
+          <input type="email" ref="email" name="email" placeholder="Email" />
+          <input
+            type="password"
+            ref="password"
+            name="password"
+            placeholder="Password"
+          />
+          <button> Create Account </button>
+        </form>
+      </div>
+    );
+  }
+}
+```
