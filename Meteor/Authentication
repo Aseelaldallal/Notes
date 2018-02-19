@@ -38,5 +38,4 @@ import { Accounts } from 'meteor/accounts-base';
       </div>
     );
   }
-}
-```
+}```
