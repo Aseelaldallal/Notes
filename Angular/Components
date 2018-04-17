@@ -1,0 +1,75 @@
+## Components
+
+app.component.html
+Angular transforms .html file to .js file and then renders it.
+
+String interpolation: Allows you to Output content of one of typescript properties into html
+
+app.component.ts:
+
+To inform angular to treat a typescript class as a component (this changes what angular does with it behind the scenes), you have to attach the @Component decorator. 
+
+Decorators allows you to attach extra information to the class.
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+
+selector: css selector by which angular will identify this whenever it encounters it in html code. See index.html, you'll see <app-root></app-root>
+
+Good idea: For selectors, prefix elements with app- , just to not confuse with native html elements
+
+templateUrl: What to render? This file holds the content of the file that should be rendered when selector is found
+
+styleUrls: CSS to ONLY be applied to this component
+
+App.module.ts
+
+you have to declare evry single component that you use. 
+Bootstrap: [AppComponent] --> this is the one component hou can find in index.html file
+
+### Adding Custom Components
+
+You have to export a class
+
+import {Component} from '@angular/core';
+
+@Component({
+  selector: 'app-user',
+  template: `
+    <p>Hello!</p>
+    <p>I'm the user component</p>`
+})
+export class UserComponent {};
+
+you can use an inline template, as above
+
+Now add the component to app.module.ts
+
+```javascript
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { AppComponent } from './app.component';
+import { UserComponent} from './user.component';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    UserComponent
+  ],
+  imports: [
+    BrowserModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
+
+Now you can use the component in the app.component.html file
+
+
+
+
