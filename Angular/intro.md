@@ -1,4 +1,3 @@
-
 ### Basics
 
 Angular uses TypeScript as its primary language. 
@@ -57,5 +56,17 @@ platformBrowserDynamic().bootstrapModule(AppModule)
 
 Go to app.module.ts -> It tells angular which features of angular this app actually uses (efficiency)
 
+
+### Decorators
+
+TypeScript Feature.
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+
+Component comes from Angular. The @ comes from Typescript and is a decorator. Refers to what is after it immediately.
 
 
