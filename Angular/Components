@@ -72,4 +72,62 @@ Now you can use the component in the app.component.html file
 
 
 
+### String Interpolation
+
+@Component({
+  selector: 'app-user',
+  template: `
+    <p>Hello {{ name }} </p>
+    <p>I'm the user component</p>`
+})
+export class UserComponent {
+  name = 'Aseel';
+}
+
+
+### Listening to Events
+
+@Component({
+  selector: 'app-user',
+  template: `
+    <input type="text" (input)="onUserInput($event)">
+    <p>Hello {{ name }} </p>
+    <p>I'm the user component</p>`
+})
+export class UserComponent {
+  name = 'Aseel';
+  onUserInput() {
+
+  }
+}
+
+$event is a reserved name
+
+Bind to the value property of the input element 
+<input type="text" (input)="onUserInput($event)" [value]="name">
+
+Set the value attribute of the html element to some text
+<input type="text" (input)="onUserInput($event)" value={{name}}>
+
+Sometimes you don't have an attribute, so the first syntax becomes important.
+
+### Two way Binding
+
+Event binding: (input)="onUserInput($event)" 
+Property Binding: [value]="name"
+
+Shorten: Listen to input event, and set the value
+ <input type="text" [(ngModel)]="name">
+ So angular listens to the input event, and binds the value 
+ngmodel directive enables two way binding
+you can ONLY use it on an element that has a value property it can bind to
+
+For this to work, we need to add a new module to app.module.ts:
+FormsModule
+
+
+### Directives
+
+Instructions you place in your templates.
+
 
