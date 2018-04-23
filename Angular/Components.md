@@ -1,11 +1,11 @@
 ## Components
 
 **app.component.html**
+
 Angular transforms .html file to .js file and then renders it.
 
 
 **App.component.ts:**
-
 
 whatever.component.ts
 
@@ -28,11 +28,14 @@ Decorators allows you to attach extra information to the class.
 })
 ```
 
+
 **selector**: css selector by which angular will identify this whenever it encounters it in html code. See index.html, you'll see <app-root></app-root>
 
 Good idea: For selectors, prefix elements with app- , just to not confuse with native html elements
 
+
 **templateUrl**: What to render? This file holds the content of the file that should be rendered when selector is found
+
 
 **styleUrls**: CSS to ONLY be applied to this component
 
@@ -132,6 +135,7 @@ Basically,
 [property]="whatever" binds the variable whatever to that property.
 
 **Set the value attribute of the html element to some text**
+
 ```javascript
 <input type="text" (input)="onUserInput($event)" value={{name}}>
 ```
@@ -140,7 +144,8 @@ Sometimes you don't have an attribute, so the first syntax becomes important.
 
 #### Two way Binding
 
-**Event binding:** (input)="onUserInput($event)" 
+**Event binding:** (input)="onUserInput($event)"
+
 **Property Binding:** [value]="name"
 
 **Shorten:** 
@@ -178,5 +183,76 @@ imports: [
 * Property Binding to pass data into a property
 * Event Binding to listen to an event
 * Two way binding to do event binding and property binding simultaneously (as long as we're talking about  the input event, and the value property)
+
+
+### Binding Component Properties
+
+What if you wanted to pass data in from the outside? 
+
+```
+<app-user [name]="'Max'"> <app-user>
+```
+
+Note the single quotes around Max, this is so that it is interpreted as a string. 
+
+This isn't enough. By default, name can't be set from outside. To do this, you need to add a decorator.
+
+Go into user.component.ts, and add the following:
+
+```
+import { Component, Input } from '@angular/core';
+
+export class UserComponent{
+	@Input() name;
+	...
+}
+```
+
+@Input is the decorator (all decorators are just functions). 
+
+### Listening to Custom Events
+
+**app.component.html**:
+
+```
+<app-user [name]="rootName" (nameChanged)="onNameChanged($event)"></app-user>
+```
+
+**app.component.ts**:
+
+```
+export class AppComponent {
+  title = 'app';
+  rootName = 'Aseel';
+  onNameChanged(newName) {
+    this.rootName = newName;
+  }
+}
+```
+
+**user.component.html**:
+
+```
+  <input type="text" (input)="onUserInput($event)" [value]="name">
+```
+  
+**user.component.ts**:
+
+```javascript
+import { ..., Output, EventEmitter} from '@angular/core';
+
+@Component({
+  selector: 'app-user',
+  template: 'user.component.html'
+ })
+ 
+ export class UserComponent {
+  @Input() name;
+  @Output() nameChanged = new EventEmitter<string>();
+  onUserInput(event) {
+    this.nameChanged.emit(event.target.value);
+  }
+}
+```
 
 
