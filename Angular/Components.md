@@ -256,3 +256,13 @@ import { ..., Output, EventEmitter} from '@angular/core';
 ```
 
 
+### Multiple Components and Using the CLI for Component Generation
+
+**Command**:
+n generate component <component name>
+n g c <component name>
+
+This will create a new folder in app folder named 'component name'.
+
+Note: In app.module.ts, you'll see everything automatically added once you run the above.
+
