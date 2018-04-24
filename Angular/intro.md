@@ -5,9 +5,13 @@ Angular uses TypeScript as its primary language.
 ### Setup
 
 Install Angular CLI
+
 npm install -g @angular/cli
+
 ng new my-dream-app
+
 cd my-dream-app
+
 ng serve
 
 ***ng serve:*** 
