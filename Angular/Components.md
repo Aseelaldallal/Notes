@@ -154,8 +154,7 @@ Listen to input event, and set the value
 <input type="text" [(ngModel)]="name">
 ```
 
-Angular will now manage the binding in two directions. I.e, ngModel directive enables *two way binding*. It listens to the input event, and binds the value. Thus,
-you can ONLY use it on an element that has a value property it can bind to.
+Angular will now manage the binding in two directions. I.e, ngModel directive enables *two way binding*. It listens to the input event, and binds the value. Thus, you can ONLY use it on an element that has a value property it can bind to.
 
 For ngModel to work, we need to add a new module to app.module.ts:
 
@@ -260,9 +259,15 @@ import { ..., Output, EventEmitter} from '@angular/core';
 
 **Command**:
 
-n generate component <component name>
-	
-n g c <component name>
+```
+ng generate component <component name>
+```
+
+OR 
+
+```
+ng g c <component name>
+```
 
 This will create a new folder in app folder named 'component name'.
 
