@@ -42,6 +42,10 @@ Now you can access it anywhere in the class via this.swService
 #### Step 3: Tell Angular how to create StarWarsService Object
 
 
+**METHOD 1: Create a new Instance of the service in each component**
+
+By default, Angular doesn't know how to create StarWarsService, we have to tell it. To do that, you add a provider array in @Component.
+
 ```
 import { StarWarsService } from '../starwars.service';
 
@@ -60,6 +64,26 @@ export class ItemComponent implements OnInit {
 ```
 
 Note: If you don't specify providers, you'll get an error "No Provider" in console.
+
+Note: If you have another component, and you do the same thing as above, the other component and this ItemComponent WILL NOT be using the same StarWarsService instance - they're disconnected.
+
+
+**METHOD 2: Let Child Components Share the Same Instance with Parent Component**
+
+
+Say ItemComponent and ChickenComponent were child components of AppComponent. Then, instead of adding the StarWarsService in the provider array of each of the child components, you would add it to the providers array of the AppComponent.
+
+**METHOD 3: Let ENTIRE App use the SAME instance**
+
+This happens in app.module.ts
+
+```javascript
+@NgModule({
+...
+providers: [StarWarsService],
+...
+})
+```
 
 
 
