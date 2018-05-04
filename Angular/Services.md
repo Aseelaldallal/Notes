@@ -2,6 +2,11 @@
 
 File Type: name.services.ts
 
+## Creating Services via CLI
+
+```ng g s log```
+creates log.services.ts in root folder by default
+
 ## Dependency Injection
 
 Let's say we create a service, starWarsService, and we want to use it in ItemComponent.
@@ -13,7 +18,7 @@ Let's say we create a service, starWarsService, and we want to use it in ItemCom
 import { StarWarsService } from '../starwars.service';
 
 export class ItemComponent implements OnInit {
-
+star
 	constructor(swService : StarWarsService) {
 	}
 
@@ -78,6 +83,8 @@ Say ItemComponent and ChickenComponent were child components of AppComponent. Th
 This happens in app.module.ts
 
 ```javascript
+import {StarWarsService} from ....;
+
 @NgModule({
 ...
 providers: [StarWarsService],
@@ -86,5 +93,46 @@ providers: [StarWarsService],
 ```
 
 
+## Injecting Services into Services
 
+
+
+Assume we have a service called LogService and we want to inject it into StarwarsService (i.e we want to use it in StarWarsService).
+
+
+### Step 1:
+
+```
+import LogService from '....'
+
+export class StarWarsService {
+	
+	private logServ;
+	
+	constructor(logServ : LogService) {
+		this.logServ = logServ
+	}
+
+}
+```
+
+Now you can use this.logServ in the code
+
+### Step 2: 
+
+We have to PROVIDE log service. Services can only receive services as dependencies if you provie them in app.module.ts.
+
+### Step 3:
+
+If you inject Service A into Service B, YOU MUST add @injectable() decorator to Service A.
+
+```
+import { Injectable } from '@angular/core'
+
+@injectable()
+
+export class LogService {
+...
+}
+```
 
