@@ -37,7 +37,7 @@ Notice: We're not using ngModel for two way binding here.
 
 .html file: 
 ```javascript
-<form ngSubmit="submitMyForm">
+<form (ngSubmit)="submitMyForm">
 </form>
 ```
 
@@ -57,7 +57,7 @@ By adding the directive ngSubmit:
 **Step 3: Local References**
 
 ```javascript
-<form ngSubmit="submitMyForm" #form="ngForm">
+<form (ngSubmit)="submitMyForm" #form="ngForm">
 </form>
 ```
 
@@ -72,10 +72,23 @@ When we add #form, we bind the JS object angular created, which represents our f
 .ts file:
 ```javascript
 onSubmit(form) {
-// access form values via form.values
-// For example form.values.personName for the value of input element with name personName
+// access form values via form.value
+// For example form.value.personName for the value of input element with name personName
 }
 ```
+
+Now assume we want to access the input element
+
+```
+ <input type="text" id="name" name="name" class="form-control" ngModel required #nameCtrl="ngModel">
+```
+
+Now we can do things like
+
+```
+<span *ngIf="nameCtrol.invalid"> Blah </span>
+```
+
 
 #### Form Validation
 
