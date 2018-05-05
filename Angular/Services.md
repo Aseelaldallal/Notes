@@ -120,18 +120,18 @@ Now you can use this.logServ in the code
 
 ### Step 2: 
 
-We have to PROVIDE log service. Services can only receive services as dependencies if you provie them in app.module.ts.
+We have to PROVIDE log service. Services can only receive services as dependencies if you provide them in app.module.ts.
 
 ### Step 3:
 
-If you inject Service A into Service B, YOU MUST add @injectable() decorator to Service A.
+If you inject Service A into Service B, YOU MUST add @injectable() decorator to Service B.
 
 ```
 import { Injectable } from '@angular/core'
 
 @injectable()
 
-export class LogService {
+export class StarWarsService {
 ...
 }
 ```
