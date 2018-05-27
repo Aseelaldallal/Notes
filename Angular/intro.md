@@ -41,7 +41,7 @@ Allows our app to use features that aren't present in older browsers
 
 ### Index.html
 
-The single page you're seeing at the end. It is the page that is loaded.
+This is the page that the server serves. 
 
 ```
 <app-root></app-root>
