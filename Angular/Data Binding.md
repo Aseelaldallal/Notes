@@ -70,7 +70,8 @@ Don't mix
 export class ServersComponent implements onInit {
 
 	allowNewServer = false;
-	serverCreationStatus = 'No Server'
+	serverCreationStatus = 'No Server';
+	serverName ='';
 	
 	constructor() {
 		setTimeout(() => {
@@ -81,23 +82,34 @@ export class ServersComponent implements onInit {
 	onCreateServer() {
 		this.serverCreationStatus = 'Server was created';
 	}
+	
+	onUpdateServerName(event: Event) {
+		this.serverName = (<HTMLInputElement>event.target).value; 
+	}
 
 }
 ```
 
 **Template**
 ```
+<input
+	type="text"
+	(input)="onUpdateServerName($event)">
 <button
 	class="btn btn-primary"
 	[disabled]="allowNewServer" 
 	(click)="onCreateServer"
 >Add Server</button>
+<p> {[ serverName }}
 ```
 
 Parentheses are the indicator that we are using event binding.
 
 You can bind to all events made available by the html element. 
 
+**$event** 
+Reserved word which gives us access to event data. You can use it in the template when using Event Binding. $event is the data emitted with that event. Click event for example gives us an object with some information on what was clicked. 
+event.target -> html element on which event occurred 
 
 ---
 **How do you know to which Properties or Events of HTML Elements you may bind?**
@@ -109,4 +121,52 @@ The MDN (Mozilla Developer Network) offers nice lists of all properties and ev
 
 ---
 
+
+## Two Way Data Binding
+
+We combine property and event binding.
+
+**TypeScript**
+```
+export class ServersComponent implements onInit {
+
+	allowNewServer = false;
+	serverCreationStatus = 'No Server';
+	serverName ='';
+	
+	constructor() {
+		setTimeout(() => {
+			this.allowNewServer = true;
+		},2000)
+	}
+	
+	onCreateServer() {
+		this.serverCreationStatus = 'Server was created';
+	}
+	
+	onUpdateServerName(event: Event) {
+		this.serverName = (<HTMLInputElement>event.target).value; 
+	}
+
+}
+```
+
+**Template**
+```
+<input
+	type="text"
+	[(ngModel)]="serverName"
+>
+<button
+	class="btn btn-primary"
+	[disabled]="allowNewServer" 
+	(click)="onCreateServer"
+>Add Server</button>
+<p> {[ serverName }}
+```
+
+**[(ngModel)] will:**
+1. Trigger the onInput Event
+2. Update the value of serverName in our component 
+3. Update the value of the input element if we change serverName somewhere else
 
