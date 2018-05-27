@@ -29,9 +29,52 @@ Decorators allows you to attach extra information to the class.
 ```
 
 
-**selector**: css selector by which angular will identify this whenever it encounters it in html code. See index.html, you'll see <app-root></app-root>
+### Selectors:
+
+Selector by which angular will identify this whenever it encounters it in html code. See index.html, you'll see <app-root></app-root>
 
 Good idea: For selectors, prefix elements with app- , just to not confuse with native html elements
+
+Ways to select elements:
+
+#### Select by Element: 
+
+**.ts File**
+```
+@Component({
+	selector: 'app-server'
+})
+```
+
+**.html file**
+```<app-server></app-server>```
+
+#### Select by Attribute
+
+**.ts File**
+```
+@Component({
+	selector: '[app-server]'
+})
+```
+
+**.html file**
+```<div app-server></div>```
+
+#### Select by Class
+
+**.ts File**
+```
+@Component({
+	selector: '.app-server'
+})
+```
+
+**.html file**
+```<div class='app-server'></div>```
+
+
+Now angular selects the element by attribute.
 
 
 **templateUrl**: What to render? This file holds the content of the file that should be rendered when selector is found
