@@ -170,3 +170,8 @@ export class ServersComponent implements onInit {
 2. Update the value of serverName in our component 
 3. Update the value of the input element if we change serverName somewhere else
 
+** FOR TWO WAY BINDING TO WORK, YOU NEED TO ENABLE THE NGMODEL DIRECTIVE BY ADDING THE FORMSMODULE TO THE IMPORTS ARRAY IN APPMODULE **
+
+```
+import { FormsModule } from '@angular/core'
+```
