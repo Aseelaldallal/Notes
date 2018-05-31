@@ -84,5 +84,12 @@ Structural Directive.
 
 ngIf really changes the DOM, it's not just hiding or showing something.
 
+**What if we want if else?**
+
+```
+<p *ngIf="serverCreated; else noServer"> Server was created </p>
+<ng-template #noServer> <p> No server was created </p> </ng-template>
+```
+
 
 
