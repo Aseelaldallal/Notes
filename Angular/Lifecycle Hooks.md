@@ -5,6 +5,17 @@
 
 Called after a bound input property changes (i.e, when properties bound with @Input change)
 
+```javascript
+import { ... onChanges, SimpleChanges } from '@angular/core'
+export class ServerElementComponent implements OnInit, OnChanges {
+	ngOnChanges(changes: SimpleChanges) {
+		console.log(changes)
+	}
+}
+```
+
+This is the only hook that receives an argument.
+
 ### ngOnInit
 
 Called once the component is initialized (but before it's visible in the DOM)
@@ -12,6 +23,10 @@ Called once the component is initialized (but before it's visible in the DOM)
 ### ngDoCheck
 
 Called during every change detection run. Note that it runs to check IF something changed that requires it to update template. For example, when an event is fired, it runs to see if the event caused a changed.
+
+Triggers: Event called, promise fulfilled
+
+Don't put powerful code here, it'll cost you in performance
 
 ### ngAfterContentInit
 
@@ -32,3 +47,17 @@ Called every time the view (and child views) have been checked. I.e, once we're 
 ### ngOnDestroy
 
 Called once the component is about to be destroyed
+
+### Notes
+
+Good Practice: If you want to use any of those lifecycle methods, implement the interface.
+
+```javascript
+import { ... onChanges } from '@angular/core'
+export class ServerElementComponent implements OnInit, OnChanges {
+	ngOnChanges(...) {
+	}
+}
+```
+
+
