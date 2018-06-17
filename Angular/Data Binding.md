@@ -57,11 +57,51 @@ To make disabled functionality dynamic, we can bind to it by enclosing disabled 
 
 You can bind to any native html property. Disabled takes true or false (a boolean). Other html properties might expect other types.
 
-#### Property Binding vs String Interpolation
+### Property Binding vs String Interpolation
 
 If you want to output text, use string interpolation. If you want to change some property, use property binding. 
 
 Don't mix
+
+### Custom Property Binding
+
+**app.component.ts**
+```javascript
+export class AppComponent {
+  serverElements = [{type: 'server', name: 'Testserver', content: 'Just a test'}];
+}
+```
+
+**app.component.html**
+```
+      <app-server-element
+        *ngFor="let serverElement of serverElements"
+        [element]="serverElement">
+      </app-server-element>
+```
+
+**server-element.component.ts**
+```
+import { Component, OnInit, Input } from '@angular/core';
+export class ServerElementComponent implements OnInit {
+  @Input() element: { type: string, name: string, content: string };
+}
+```
+
+#### Alias
+
+You can pass a property name as you want to have it outside of this component into Input. For example, lets say into server-element you wanted to refer to it as element, but in app you wanted to refer to it as srvElem. You'd have the following
+
+**server-element.component.ts**
+```@Input('srvElem') element: { type: string, name: string, content: string };```
+
+**app.component.html**
+```
+      <app-server-element
+        *ngFor="let serverElement of serverElements"
+        [srvElem]="serverElement">
+      </app-server-element>
+```
 
 ## Event Binding
 
@@ -175,3 +215,5 @@ export class ServersComponent implements onInit {
 ```
 import { FormsModule } from '@angular/core'
 ```
+
+
