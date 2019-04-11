@@ -40,8 +40,34 @@ export default {
  <template>
     <div class="container">
         <form v-if="!submitted">
-            <div class="row">
-                <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-                    <app-fullname v-model="userData.fullname"></app-fullname>
+            <app-fullname v-model="userData.fullname"></app-fullname>
   ...
+  </template>
+  
+  <script>
+    import Fullname from './Fullname.vue'
+    export default {
+        data() {
+            return {
+                userData: {
+                    fullname: {
+                        firstname: '',
+                        lastname: ''
+                    },
+                   ...
+                },
+                ...
+            }
+        },
+        components: {
+            appFullname: Fullname
+        },
+        methods: {
+            storeName(fullname) {
+                this.userData.fullname = fullname;
+            }
+        }
+    }
+</script>
+
  ```
